@@ -3,9 +3,9 @@ import React from "react";
 import useCanvas from "../hooks/useCanvas.js";
 
 const Canvas = props => {
-  const {draw, ...rest} = props;
+  const {draw, playerX, playerY, ...other} = props;
 
-  const canvasRef = useCanvas(draw);
+  const canvasRef = useCanvas(draw, playerX, playerY);
 
   return (
     <canvas
@@ -13,7 +13,7 @@ const Canvas = props => {
       tabIndex="0"
       width="720"
       height="720"
-      {...rest}
+      {...other}
     ></canvas>
   );
 };

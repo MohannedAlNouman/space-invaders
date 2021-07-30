@@ -1,6 +1,6 @@
 import {useRef, useEffect} from "react";
 
-const useCanvas = draw => {
+const useCanvas = (draw, playerX, playerY) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -10,9 +10,9 @@ const useCanvas = draw => {
     let frameCount = 0;
     let animationFrameId;
 
-    const render = () => {
+    const render = (time) => {
       frameCount++;
-      draw(context, frameCount);
+      draw(context, frameCount, playerX, playerY);
       animationFrameId = window.requestAnimationFrame(render);
     };
     render();
