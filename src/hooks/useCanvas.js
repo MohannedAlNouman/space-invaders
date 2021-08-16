@@ -11,7 +11,9 @@ const useCanvas = (draw, playerX, playerY) => {
     let animationFrameId;
 
     const render = (time) => {
-      frameCount++;
+      // console.log(time);
+      //each fram takes 16.66 ms or the game runs at 60 fps
+      // frameCount++;
       draw(context, frameCount, playerX, playerY);
       animationFrameId = window.requestAnimationFrame(render);
     };
@@ -20,7 +22,8 @@ const useCanvas = (draw, playerX, playerY) => {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [draw]);
+  }, []);
+  //figure out dependencies
 
   return canvasRef;
 };
