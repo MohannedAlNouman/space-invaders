@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {selectX, selectY} from "../reducers/ship.js";
 import Canvas from "./Canvas.js";
 import useControls from "../hooks/useControls.js";
+import {drawShip} from "../draw.js";
 
 const Game = props => {
   const playerX = useSelector(state => {
@@ -16,7 +17,9 @@ const Game = props => {
 
   useControls();
 
-  return <Canvas {...props} playerX={playerX} playerY={playerY} />;
+  return (
+    <Canvas {...props} draw={drawShip} playerX={playerX} playerY={playerY} />
+  );
 };
 
 export default Game;

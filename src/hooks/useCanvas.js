@@ -2,28 +2,28 @@ import {useRef, useEffect} from "react";
 
 const useCanvas = (draw, playerX, playerY) => {
   const canvasRef = useRef(null);
+  const requestRef = useRef(null);
+  // const previousTimeRef = useRef();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
     let frameCount = 0;
-    let animationFrameId;
 
-    const render = (time) => {
-      // console.log(time);
+    const render = time => {
+      // console.log(requestRef.current);
       //each fram takes 16.66 ms or the game runs at 60 fps
       // frameCount++;
       draw(context, frameCount, playerX, playerY);
-      animationFrameId = window.requestAnimationFrame(render);
+      requestRef.current = window.requestAnimationFrame(render);
     };
-    render();
+    requestRef.current = window.requestAnimationFrame(render);
 
     return () => {
-      window.cancelAnimationFrame(animationFrameId);
+      window.cancelAnimationFrame(requestRef.current);
     };
   }, []);
-  //figure out dependencies
 
   return canvasRef;
 };
